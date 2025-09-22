@@ -9,6 +9,8 @@ import (
 func main() {
 
 	http.HandleFunc("/", service.HelloWorldHandler)
+	http.HandleFunc("/tags", service.TagsHandler)
+	http.HandleFunc("/send", service.SendHandler)
 
 	log.Fatal(http.ListenAndServe(":80", nil))
 }
