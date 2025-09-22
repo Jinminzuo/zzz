@@ -1,14 +1,33 @@
 package main
 
 import (
-	"log"
+	"github.com/labstack/echo/v4"
 	"net/http"
-	"wxcloudrun-golang/service"
 )
 
+// JsonResult 返回结构
+type JsonResult struct {
+	Code     int         `json:"code"`
+	ErrorMsg string      `json:"errorMsg,omitempty"`
+	Data     interface{} `json:"data"`
+}
+
 func main() {
+	// 创建 Echo 实例
+	e := echo.New()
 
-	http.HandleFunc("/", service.HelloWorldHandler)
+	// 注册 /helloworld 路由
+	e.GET("/helloworld", HelloWorldHandler)
 
-	log.Fatal(http.ListenAndServe(":80", nil))
+	// 启动服务，监听 8080
+	e.Logger.Fatal(e.Start(":8080"))
+}
+
+// HelloWorldHandler 返回 hello world JSON
+func HelloWorldHandler(c echo.Context) error {
+	result := JsonResult{
+		Code: 0,
+		Data: "helloworld echo",
+	}
+	return c.JSON(http.StatusOK, result)
 }
