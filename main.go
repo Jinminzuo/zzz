@@ -20,7 +20,7 @@ func main() {
 	e.GET("/helloworld", HelloWorldHandler)
 
 	// 启动服务，监听 8080
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(":80"))
 }
 
 // HelloWorldHandler 返回 hello world JSON
