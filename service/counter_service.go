@@ -20,29 +20,6 @@ type JsonResult struct {
 	Data     interface{} `json:"data"`
 }
 
-// HelloWorldHandler 返回 hello world
-func HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
-	// 仅支持 GET
-	if r.Method != http.MethodGet {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		json.NewEncoder(w).Encode(JsonResult{
-			Code:     -1,
-			ErrorMsg: "请求方法不支持",
-		})
-		return
-	}
-
-	// 构建返回结果
-	result := JsonResult{
-		Code: 0,
-		Data: "helloworld",
-	}
-
-	// 设置响应头
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(result)
-}
-
 // IndexHandler 计数器接口
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	data, err := getIndex()
