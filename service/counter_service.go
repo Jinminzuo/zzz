@@ -97,7 +97,7 @@ func SendHandler(w http.ResponseWriter, r *http.Request) {
 	url := fmt.Sprintf("%s/cgi-bin/message/mass/sendall", openAPIHost)
 	payload, _ := json.Marshal(req)
 
-	resp, err := http.Post(url, "application/json", bytes.NewReader(payload))
+	resp, err := http.Post(url, "application/json;charset=utf-8", bytes.NewReader(payload))
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -105,6 +105,6 @@ func SendHandler(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", "application/json;charset=utf-8")
 	w.Write(body)
 }
