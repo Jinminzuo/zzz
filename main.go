@@ -12,7 +12,7 @@ func main() {
 	//}
 
 	http.HandleFunc("/", service.HelloWorldHandler)
-	http.HandleFunc("/api/count", service.CounterHandler)
+	http.HandleFunc("/api/hello", service.HelloWorldHandler)
 
 	log.Fatal(http.ListenAndServe(":80", nil))
 }
